@@ -23,7 +23,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(9px);
     z-index: -1;
   }
 }
@@ -123,7 +123,6 @@ span {
     .top-right {
       padding: 1rem;
       width: 40%;
-      // background: lightblue;
       background: rgba(0, 0, 0, 0.8);
 
       .icon-container {
