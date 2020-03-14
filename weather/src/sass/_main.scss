@@ -1,20 +1,132 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+body {
+  font-family: "Open Sans", sans-serif;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+p,
+span {
+  font-size: 1.2rem;
+}
+
 .container {
-  border: 1px solid red;
-  width: 1000px;
+  //   border: 1px solid red;
+  width: 55%;
   margin: 15rem auto 0;
 
+  form {
+    width: 40%;
+    margin: 0 auto 2rem;
+    input {
+      width: 70%;
+      font-size: 1.2rem;
+      padding: 0.2rem;
+      outline: none;
+    }
+
+    button {
+      display: inline-block;
+      font-size: 1.2rem;
+      padding: 0.3rem 1.5rem;
+      margin-left: 0.5rem;
+      outline: none;
+      border: none;
+      background: green;
+
+      color: white;
+      cursor: pointer;
+    }
+  }
+
   .info-container {
-    border: 1px solid blue;
     display: flex;
 
     .top-left {
       width: 60%;
+      padding: 1rem 1rem 2rem;
+      background: lightcoral;
+
+      .main-location {
+        display: flex;
+        justify-content: flex-end;
+
+        p {
+          font-size: 1.7rem;
+        }
+      }
+
+      .bottom-left {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        height: 95%;
+
+        .date-info {
+          span {
+            display: block;
+          }
+
+          .time {
+            font-size: 1.4rem;
+          }
+
+          .date {
+            font-size: 1rem;
+            padding-top: 0.5rem;
+          }
+        }
+
+        .main-temp {
+          span {
+            display: block;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+
+    .top-right {
+      padding: 1rem;
+      width: 40%;
+      background: lightblue;
+
+      .icon-container {
+        width: 100%;
+        padding: 2rem 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .icon {
+          padding-bottom: 1.5rem;
+        }
+
+        .icon-des {
+          border-bottom: 1px solid grey;
+          display: block;
+          width: 100%;
+          text-align: center;
+          padding-bottom: 1.5rem;
+        }
+      }
+
+      .border {
+        border-bottom: 1px solid grey;
+      }
+      .flex {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.9rem 0.3rem;
+      }
     }
   }
 }
