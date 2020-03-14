@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  border: 1px solid red;
+  width: 1000px;
+  margin: 15rem auto 0;
+
+  .info-container {
+    border: 1px solid blue;
+    display: flex;
+
+    .top-left {
+      width: 60%;
+    }
+  }
+}

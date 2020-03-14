@@ -1,0 +1,1 @@
+*{-webkit-box-sizing:border-box;box-sizing:border-box;margin:0;padding:0}.container{border:1px solid red;width:1000px;margin:15rem auto 0}.container .info-container{border:1px solid blue;display:-webkit-box;display:-ms-flexbox;display:flex}.container .info-container .top-left{width:60%}
