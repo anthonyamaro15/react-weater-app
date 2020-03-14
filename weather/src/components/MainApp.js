@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-// import Form from "./Form";
+import { getTime, convertTimes } from "./HelperFunctions";
 import axios from "axios";
 
 const apiKey = "eb293611b49b059d8a3390adbe3d3d08";
+
+console.log(getTime(-25200));
+// console.log(getTime());
+// console.log(getSunriseTime(1584107608));
 
 const MainApp = () => {
   const [data, setData] = useState({});
@@ -33,6 +37,7 @@ const MainApp = () => {
         sunset
       };
       setData(obj);
+      console.log(axiosData.data);
       setWithData(true);
     }
 
@@ -50,8 +55,11 @@ const MainApp = () => {
     setValue("");
   };
 
+  const showSunrise = convertTimes(data.sunrise);
+  const showSunset = convertTimes(data.sunset);
+
   return (
-    <div>
+    <div className="body">
       {withData ? (
         <div className="container">
           <div className="form-container">
@@ -74,18 +82,21 @@ const MainApp = () => {
               </div>
               <div className="bottom-left">
                 <div className="date-info">
-                  <span className="time">4: 00 pm</span>
+                  <span className="time">{`${data.timezone}pm`}</span>
                   <span className="date">fri mar 13 2020</span>
                 </div>
                 <div className="main-temp">
-                  <span>{`${data.temp}`}</span>
+                  <span>{`${data.temp}°`}</span>
                 </div>
               </div>
             </div>
 
             <div className="top-right">
               <div className="icon-container">
-                <span className="icon">icon</span>
+                <img
+                  className="icon"
+                  src={`http://openweathermap.org/img/w/${data.icon}.png`}
+                />
                 <span className="icon-des">{data.description}</span>
               </div>
               <div className="description">
@@ -95,7 +106,7 @@ const MainApp = () => {
                 </div>
                 <div className="temperature border flex">
                   <p>temperature</p>
-                  <span>{`${data.temp}`}</span>
+                  <span>{`${data.temp}°`}</span>
                 </div>
                 <div className="humidity border flex">
                   <p>humidity</p>
@@ -107,11 +118,11 @@ const MainApp = () => {
                 </div>
                 <div className="sunrise flex">
                   <p>sunrise</p>
-                  <span>{`${data.sunrise}am`}</span>
+                  <span>{`${showSunrise}`}</span>
                 </div>
                 <div className="sunset border flex">
                   <p>sunset</p>
-                  <span>{`${data.sunset}pm`}</span>
+                  <span>{`${showSunset}`}</span>
                 </div>
               </div>
             </div>
