@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Form from "./Form";
 import Display from "./Display";
 import axios from "axios";
 
@@ -52,6 +51,7 @@ const MainApp = () => {
   const handleSubmit = e => {
     e.preventDefault();
     setResult(value);
+    console.log(value);
     setValue("");
   };
 
@@ -66,11 +66,18 @@ const MainApp = () => {
     <div className="body">
       {withData ? (
         <div className="container">
-          <Form
-            handleChange={handleChange}
-            handleSubmi={handleSubmit}
-            value={value}
-          />
+          <div className="form-container">
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="search city"
+                onChange={handleChange}
+                name="value"
+                value={value}
+              />
+              <button type="submit">Search</button>
+            </form>
+          </div>
           <Display data={data} />
         </div>
       ) : (
