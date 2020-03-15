@@ -8,10 +8,8 @@
 
 .body {
   font-family: "Open Sans", sans-serif;
-  background: url("../img/stars.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: url("../img/morning.jpg");
+  @include imgProps();
   position: relative;
   height: 100vh;
   overflow: hidden;
@@ -73,17 +71,15 @@ span {
   .info-container {
     display: flex;
     text-transform: capitalize;
-    background: url("../img/stars.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: url("../img/morning.jpg");
+    @include imgProps();
+
     .top-left {
       width: 60%;
       padding: 1rem 1rem 2rem;
 
       .main-location {
-        display: flex;
-        justify-content: flex-end;
+        @include flex(flex-end);
 
         p {
           font-size: 2rem;
@@ -91,9 +87,8 @@ span {
       }
 
       .bottom-left {
-        display: flex;
+        @include flex(space-between);
         align-items: flex-end;
-        justify-content: space-between;
         height: 95%;
 
         .date-info {
@@ -130,10 +125,9 @@ span {
       .icon-container {
         width: 100%;
         padding: 2rem 0 1.5rem;
-        display: flex;
+        @include flex(center);
         flex-direction: column;
         align-items: center;
-        justify-content: center;
 
         .icon {
           padding-bottom: 1.5rem;
@@ -152,8 +146,7 @@ span {
         border-bottom: 1px solid grey;
       }
       .flex {
-        display: flex;
-        justify-content: space-between;
+        @include flex(space-between);
         padding: 0.9rem 0.3rem;
       }
     }
