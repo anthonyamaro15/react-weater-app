@@ -6,15 +6,16 @@
   padding: 0;
 }
 
-body {
+.body {
   font-family: "Open Sans", sans-serif;
-  background: url("../img/img5.jpg");
+  background: url("../img/stars.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
   height: 100vh;
   overflow: hidden;
+  z-index: 10;
 
   &::after {
     content: "";
@@ -23,7 +24,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    backdrop-filter: blur(9px);
+    backdrop-filter: blur(5px);
     z-index: -1;
   }
 }
@@ -62,7 +63,7 @@ span {
       margin-left: 0.5rem;
       outline: none;
       border: none;
-      background: green;
+      background: grey;
 
       color: white;
       cursor: pointer;
@@ -71,11 +72,11 @@ span {
 
   .info-container {
     display: flex;
-    background: url("../img/img5.jpg");
+    text-transform: capitalize;
+    background: url("../img/stars.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-
     .top-left {
       width: 60%;
       padding: 1rem 1rem 2rem;
@@ -85,7 +86,7 @@ span {
         justify-content: flex-end;
 
         p {
-          font-size: 1.7rem;
+          font-size: 2rem;
         }
       }
 
@@ -101,19 +102,20 @@ span {
           }
 
           .time {
-            font-size: 1.4rem;
+            font-size: 1.8rem;
           }
 
           .date {
             font-size: 1rem;
             padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
           }
         }
 
         .main-temp {
           span {
             display: block;
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
           }
         }
@@ -123,7 +125,7 @@ span {
     .top-right {
       padding: 1rem;
       width: 40%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.4);
 
       .icon-container {
         width: 100%;

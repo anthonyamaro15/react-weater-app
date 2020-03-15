@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getTime, convertTimes } from "./HelperFunctions";
+import { convertTimes, timeNow, getDate } from "./HelperFunctions";
 import axios from "axios";
 
 const apiKey = "eb293611b49b059d8a3390adbe3d3d08";
-
-console.log(getTime(-25200));
-// console.log(getTime());
-// console.log(getSunriseTime(1584107608));
 
 const MainApp = () => {
   const [data, setData] = useState({});
@@ -37,7 +33,7 @@ const MainApp = () => {
         sunset
       };
       setData(obj);
-      console.log(axiosData.data);
+      // console.log(axiosData.data);
       setWithData(true);
     }
 
@@ -55,15 +51,24 @@ const MainApp = () => {
     setValue("");
   };
 
+  const getCurrTime = () => {
+    let time = new Date().toLocaleTimeString();
+    let arr = time.split(" ");
+    console.log(arr);
+  };
+  getCurrTime();
+
   const showSunrise = convertTimes(data.sunrise);
   const showSunset = convertTimes(data.sunset);
+  const placeTime = timeNow();
+  const gettingDate = getDate();
 
   return (
     <div className="body">
       {withData ? (
         <div className="container">
           <div className="form-container">
-            <form onSubmit={handleSubmit} data={data}>
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="search city"
@@ -82,8 +87,8 @@ const MainApp = () => {
               </div>
               <div className="bottom-left">
                 <div className="date-info">
-                  <span className="time">{`${data.timezone}pm`}</span>
-                  <span className="date">fri mar 13 2020</span>
+                  <span className="time">{`${placeTime}`}</span>
+                  <span className="date">{`${gettingDate}`}</span>
                 </div>
                 <div className="main-temp">
                   <span>{`${data.temp}°`}</span>

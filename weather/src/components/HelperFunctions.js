@@ -1,14 +1,13 @@
-export const getTime = num => {
-  //   let time = new Date(num);
-  //   return time;
-  //   let nu = Math.floor(new Date().getTime() / 1000.0);
-  //   var myDate = new Date(nu * 1000);
+export const timeNow = () => {
+  const time = new Date().toLocaleTimeString();
+  return time;
+};
 
-  var myDate = new Date(num * 60000 * num);
-  //   return myDate;
-  return myDate.toLocaleTimeString();
+export const getDate = () => {
+  const date = new Date().toDateString();
+  return date;
 };
 
 export const convertTimes = num => {
-  return new Date(num).toLocaleTimeString();
+  return new Date(num * 1000).toLocaleTimeString();
 };
