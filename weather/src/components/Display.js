@@ -26,6 +26,7 @@ const Display = ({ data }) => {
       <div className="top-right">
         <div className="icon-container">
           <img
+            alt="weather icon"
             className="icon"
             src={`http://openweathermap.org/img/w/${data.icon}.png`}
           />
