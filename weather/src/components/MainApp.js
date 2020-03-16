@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Display from "./Display";
+import Form from "./Form";
 import axios from "axios";
 
 // test
 
 const MainApp = () => {
   const [data, setData] = useState({});
-  const [value, setValue] = useState("");
   const [withData, setWithData] = useState(false);
   const [result, setResult] = useState("las vegas");
   const apiKey = "eb293611b49b059d8a3390adbe3d3d08";
@@ -53,16 +53,8 @@ const MainApp = () => {
     getData(result);
   }, [result]);
 
-  const handleChange = e => {
-    const val = e.target.value;
-    setValue(val);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setResult(value);
-    console.log(value);
-    setValue("");
+  const getCity = city => {
+    setResult(city);
   };
 
   const getTime = () => {
@@ -71,30 +63,19 @@ const MainApp = () => {
   };
 
   const getCurrTime = () => {
-    let time = new Date().toLocaleTimeString();
-    let arr = time.split("");
-    let dayRnight = arr.slice(-2)[0];
-    let firstIn = arr[0];
-    console.log(firstIn);
+    //  let time = new Date().toLocaleTimeString();
+    //  let arr = time.split("");
+    //  let dayRnight = arr.slice(-2)[0];
+    //  let firstIn = arr[0];
+    //  console.log(firstIn);
   };
-  //   getCurrTime();
+  getCurrTime();
 
   return (
     <div className="body">
       {withData ? (
         <div className="container">
-          <div className="form-container">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="search city"
-                onChange={handleChange}
-                name="value"
-                value={value}
-              />
-              <button type="submit">Search</button>
-            </form>
-          </div>
+          <Form getCity={getCity} />
           <Display data={data} time={time} />
         </div>
       ) : (
