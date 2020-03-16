@@ -1,10 +1,9 @@
 import React from "react";
-import { convertTimes, timeNow, getDate } from "./HelperFunctions";
+import { convertTimes, getDate } from "./HelperFunctions";
 
-const Display = ({ data }) => {
+const Display = ({ data, time }) => {
   const showSunrise = convertTimes(data.sunrise);
   const showSunset = convertTimes(data.sunset);
-  const placeTime = timeNow();
   const gettingDate = getDate();
   return (
     <div className="info-container">
@@ -14,7 +13,7 @@ const Display = ({ data }) => {
         </div>
         <div className="bottom-left">
           <div className="date-info">
-            <span className="time">{`${placeTime}`}</span>
+            <span className="time">{`${time}`}</span>
             <span className="date">{`${gettingDate}`}</span>
           </div>
           <div className="main-temp">

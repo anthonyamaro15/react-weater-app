@@ -8,6 +8,14 @@ const MainApp = () => {
   const [withData, setWithData] = useState(false);
   const [result, setResult] = useState("las vegas");
   const apiKey = "eb293611b49b059d8a3390adbe3d3d08";
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+
+  useEffect(() => {
+    const timeID = setTimeout(() => {
+      getTime();
+    }, 1000);
+    return () => clearTimeout(timeID);
+  }, [time]);
 
   useEffect(() => {
     async function getData(city) {
@@ -55,11 +63,18 @@ const MainApp = () => {
     setValue("");
   };
 
-  //   const getCurrTime = () => {
-  //     let time = new Date().toLocaleTimeString();
-  //     let arr = time.split(" ");
-  //     console.log(arr);
-  //   };
+  const getTime = () => {
+    const time = new Date().toLocaleTimeString();
+    setTime(time);
+  };
+
+  const getCurrTime = () => {
+    let time = new Date().toLocaleTimeString();
+    let arr = time.split("");
+    let dayRnight = arr.slice(-2)[0];
+    let firstIn = arr[0];
+    console.log(firstIn);
+  };
   //   getCurrTime();
 
   return (
@@ -78,7 +93,7 @@ const MainApp = () => {
               <button type="submit">Search</button>
             </form>
           </div>
-          <Display data={data} />
+          <Display data={data} time={time} />
         </div>
       ) : (
         <h1 className="loading">Loading...</h1>
