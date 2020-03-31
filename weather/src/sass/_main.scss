@@ -47,6 +47,7 @@ span {
   form {
     width: 40%;
     margin: 0 auto 2rem;
+    position: relative;
     input {
       width: 70%;
       font-size: 1.2rem;
@@ -151,4 +152,21 @@ span {
       }
     }
   }
+}
+
+.error {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.empty-error {
+  color: red;
+  font-size: 1rem;
+  position: absolute;
+  top: 2rem;
+  left: 0;
 }

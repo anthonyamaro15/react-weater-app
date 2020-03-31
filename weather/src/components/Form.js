@@ -1,32 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { withFormik, Form, Field } from "formik";
+import * as yup from "yup";
 
-const Form = ({ getCity }) => {
-  const [value, setValue] = useState("");
+const Formm = ({ status, errors, touched, getCity }) => {
+  useEffect(() => {
+    status && getCity(status);
+  }, [status, getCity]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    getCity(value);
-    setValue("");
-  };
-
-  const handleChange = e => {
-    let val = ([e.target.name] = e.target.value);
-    setValue(val);
-  };
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="search city"
-          onChange={handleChange}
-          name="value"
-          value={value}
-        />
+      <Form>
+        <label htmlFor="city">
+          <Field type="text" placeholder="search city" id="city" name="value" />
+        </label>
         <button type="submit">Search</button>
-      </form>
+        {errors.value && touched.value && (
+          <p className="empty-error">{errors.value}</p>
+        )}
+      </Form>
     </div>
   );
 };
 
-export default Form;
+export default withFormik({
+  mapPropsToValues: () => ({
+    value: ""
+  }),
+  validationSchema: yup.object().shape({
+    value: yup.string().required("please enter value")
+  }),
+  handleSubmit: (values, { resetForm, setStatus }) => {
+    setStatus(values);
+    resetForm();
+  }
+})(Formm);

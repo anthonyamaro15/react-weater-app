@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Display from "./Display";
 import Form from "./Form";
 import axios from "axios";
 
-// test
-
 const MainApp = () => {
-  const [data, setData] = useState({});
-  const [withData, setWithData] = useState(false);
-  const [result, setResult] = useState("las vegas");
-  const apiKey = "eb293611b49b059d8a3390adbe3d3d08";
   const [time, setTime] = useState(new Date().toLocaleTimeString());
+  const dispatch = useDispatch();
+  const reducer = useSelector(state => ({
+    ...state
+  }));
+  const { loading, data, error, result, apiKey } = reducer.mainReducer;
 
   useEffect(() => {
     const timeID = setTimeout(() => {
@@ -20,10 +20,11 @@ const MainApp = () => {
   }, [time]);
 
   useEffect(() => {
-    async function getData(city) {
+    async function getData() {
+      dispatch({ type: "FETCHING_DATA" });
       try {
         const axiosData = await axios.get(
-          `http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${apiKey}&units=imperial`
+          `http://api.openweathermap.org/data/2.5/weather?q=${result}&APPID=${apiKey}&units=imperial`
         );
         const { name, weather, main, wind, sys, timezone } = axiosData.data;
         const { main: mainW, description, icon } = weather[0];
@@ -42,19 +43,19 @@ const MainApp = () => {
           sunrise,
           sunset
         };
-        setData(obj);
-        setWithData(true);
+
+        dispatch({ type: "GOT_DATA", payload: obj });
       } catch (error) {
-        console.log(error.message);
-        alert("city not found");
+        console.log(error.response);
+        dispatch({ type: "FETCH_ERROR", payload: error.response.data.message });
       }
     }
 
-    getData(result);
+    getData();
   }, [result]);
 
-  const getCity = city => {
-    setResult(city);
+  const getCity = value => {
+    dispatch({ type: "GET_VALUE", payload: value });
   };
 
   const getTime = () => {
@@ -72,14 +73,20 @@ const MainApp = () => {
   getCurrTime();
 
   return (
-    <div className="body">
-      {withData ? (
-        <div className="container">
-          <Form getCity={getCity} />
-          <Display data={data} time={time} />
+    <div>
+      {!error ? (
+        <div className="body">
+          {!loading ? (
+            <div className="container">
+              <Form getCity={getCity} />
+              <Display data={data} time={time} />
+            </div>
+          ) : (
+            <h1 className="loading">Loading...</h1>
+          )}
         </div>
       ) : (
-        <h1 className="loading">Loading...</h1>
+        <h1 className="error">{error}</h1>
       )}
     </div>
   );
