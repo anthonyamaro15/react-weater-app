@@ -7,16 +7,12 @@ import axios from "axios";
 // test
 
 const MainApp = () => {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
   const dispatch = useDispatch();
   const reducer = useSelector(state => ({
     ...state
   }));
   const { loading, data, error, result, apiKey } = reducer.mainReducer;
-  //   const [data, setData] = useState({});
-  //   const [withData, setWithData] = useState(false);
-  //   const [result, setResult] = useState("las vegas");
-  //   const apiKey = "eb293611b49b059d8a3390adbe3d3d08";
-  const [time, setTime] = useState(new Date().toLocaleTimeString());
 
   useEffect(() => {
     const timeID = setTimeout(() => {
@@ -24,7 +20,7 @@ const MainApp = () => {
     }, 1000);
     return () => clearTimeout(timeID);
   }, [time]);
-  //   console.log("new data", data);
+
   useEffect(() => {
     async function getData() {
       dispatch({ type: "FETCHING_DATA" });
@@ -53,7 +49,7 @@ const MainApp = () => {
         dispatch({ type: "GOT_DATA", payload: obj });
       } catch (error) {
         console.log(error.response);
-        dispatch({ type: "FETCH_ERROR", payload: error.response });
+        dispatch({ type: "FETCH_ERROR", payload: error.response.data.message });
       }
     }
 
@@ -63,10 +59,6 @@ const MainApp = () => {
   const getCity = value => {
     dispatch({ type: "GET_VALUE", payload: value });
   };
-
-  //   const getCity = city => {
-  //     setResult(city);
-  //   };
 
   const getTime = () => {
     const time = new Date().toLocaleTimeString();
@@ -83,14 +75,20 @@ const MainApp = () => {
   getCurrTime();
 
   return (
-    <div className="body">
-      {!loading ? (
-        <div className="container">
-          <Form getCity={getCity} />
-          <Display data={data} time={time} />
+    <div>
+      {!error ? (
+        <div className="body">
+          {!loading ? (
+            <div className="container">
+              <Form getCity={getCity} />
+              <Display data={data} time={time} />
+            </div>
+          ) : (
+            <h1 className="loading">Loading...</h1>
+          )}
         </div>
       ) : (
-        <h1 className="loading">Loading...</h1>
+        <h1 className="error">{error}</h1>
       )}
     </div>
   );
