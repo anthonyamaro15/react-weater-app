@@ -10,7 +10,7 @@ const MainApp = () => {
   const reducer = useSelector(state => ({
     ...state
   }));
-  const { loading, data, error, result, apiKey } = reducer.mainReducer;
+  const { loading, data, error, result } = reducer.mainReducer;
 
   useEffect(() => {
     const timeID = setTimeout(() => {
@@ -24,7 +24,7 @@ const MainApp = () => {
       dispatch({ type: "FETCHING_DATA" });
       try {
         const axiosData = await axios.get(
-          `http://api.openweathermap.org/data/2.5/weather?q=${result}&APPID=${apiKey}&units=imperial`
+          `http://api.openweathermap.org/data/2.5/weather?q=${result}&APPID=${process.env.REACT_APP_API_KEY}&units=imperial`
         );
         const { name, weather, main, wind, sys, timezone } = axiosData.data;
         const { main: mainW, description, icon } = weather[0];
@@ -52,7 +52,7 @@ const MainApp = () => {
     }
 
     getData();
-  }, [result]);
+  }, [result, dispatch]);
 
   const getCity = value => {
     dispatch({ type: "GET_VALUE", payload: value });
