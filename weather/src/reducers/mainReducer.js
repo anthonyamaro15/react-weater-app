@@ -2,8 +2,7 @@ const initialValue = {
   result: "las vegas",
   loading: false,
   data: {},
-  error: "",
-  apiKey: "eb293611b49b059d8a3390adbe3d3d08"
+  error: ""
 };
 
 export const mainReducer = (state = initialValue, action) => {
