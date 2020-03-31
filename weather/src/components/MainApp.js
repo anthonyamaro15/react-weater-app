@@ -4,8 +4,6 @@ import Display from "./Display";
 import Form from "./Form";
 import axios from "axios";
 
-// test
-
 const MainApp = () => {
   const [time, setTime] = useState(new Date().toLocaleTimeString());
   const dispatch = useDispatch();

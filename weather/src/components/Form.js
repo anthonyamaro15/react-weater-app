@@ -14,6 +14,9 @@ const Formm = ({ status, errors, touched, getCity }) => {
           <Field type="text" placeholder="search city" id="city" name="value" />
         </label>
         <button type="submit">Search</button>
+        {errors.value && touched.value && (
+          <p className="empty-error">{errors.value}</p>
+        )}
       </Form>
     </div>
   );
